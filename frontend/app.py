@@ -18,8 +18,6 @@ if not API_URL:
     st.error("API_URL not found. Check your .env file.")
     st.stop()
 
-st.write("API URL:", API_URL) 
-
 st.title("🩺 MedBuddy")
 st.write("Heart Disease Risk Predictor 🫀")
 
