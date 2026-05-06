@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from backend.predictor import predict
+from predictor import predict
 
 app = FastAPI(
     title="Heart Disease Prediction API",
