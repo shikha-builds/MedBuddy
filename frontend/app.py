@@ -1,16 +1,12 @@
 import os
 import requests
 import streamlit as st
-from dotenv import load_dotenv
 
 st.set_page_config(
     page_title="MedBuddy",
     page_icon="🩺",
     layout="centered"
 )
-
-# load .env to env variables
-load_dotenv()
 
 import os
 import streamlit as st
