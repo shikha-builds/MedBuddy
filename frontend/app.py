@@ -8,22 +8,21 @@ st.set_page_config(
     layout="centered"
 )
 
-import os
-import streamlit as st
-
+# app url 
 try:
     API_URL = st.secrets["API_URL"]
 except:
     API_URL = os.getenv("API_URL")
 
 if not API_URL:
-    st.error("API_URL not found. Check your .env file.")
+    st.error("API_URL not found. Please configure Streamlit secrets or .env")
     st.stop()
 
+ # user interface
 st.title("🩺 MedBuddy")
 st.write("Heart Disease Risk Predictor 🫀")
 
-st.subheader("Enter Patient details and Click **Predict**")
+st.subheader("Enter Patient details and Click Predict")
 
 col1, col2, col3 = st.columns(3)
 
@@ -40,14 +39,15 @@ with col2:
     thalach = st.number_input("Max Heart Rate (thalach)", 0, 250, 168)
     exang = st.selectbox("Exercise Induced Angina", [0, 1])
 
-
 with col3:
     oldpeak = st.number_input("Oldpeak (ST depression)", 0.0, 10.0, 1.0)
     slope = st.number_input("Slope", 0, 2, 2)
     ca = st.number_input("Number of Major Vessels (ca)", 0, 4, 0)
     thal = st.number_input("Thal", 0, 3, 2)
 
+# prediction
 if st.button("Predict 🧑‍⚕️"):
+
     input_data = {
         "age": age,
         "sex": sex,
@@ -64,17 +64,20 @@ if st.button("Predict 🧑‍⚕️"):
         "thal": thal
     }
 
-    response = requests.post(
-    API_URL,
-    json=input_data,
-    timeout=60
-    )
-    
-    if response.status_code != 200:
-        st.error("Something went wrong. Try again later...")
+    try:
+        with st.spinner("Analyzing patient data... ⏳"):
+            response = requests.post(
+                API_URL,
+                json=input_data,
+                timeout=120
+            )
 
-    else:
+        if response.status_code != 200:
+            st.error("Backend error. Please try again later.")
+            st.stop()
+
         result = response.json()
+
         prediction = result["prediction"]
         probability = result["probability"]
         diagnosis = result["diagnosis"]
@@ -82,12 +85,17 @@ if st.button("Predict 🧑‍⚕️"):
         st.divider()
 
         st.metric(
-            label = "Heart Disease Probability",
-            value = f"{probability:.2f}"
+        label="Heart Disease Probability",
+        value=f"{probability * 100:.1f}%"
         )
 
         if prediction == 1:
-            st.error(f"⚠️ Model Prediction: {diagnosis}")
+            st.error(f"⚠️ {diagnosis}")
         else:
-            st.success(f"✅ Model Prediction: {diagnosis}")
-        
+            st.success(f"✅ {diagnosis}")
+
+    except requests.exceptions.Timeout:
+        st.error("⚠️ Server is waking up. Please try again in a few seconds.")
+
+    except Exception as e:
+        st.error(f"Unexpected error: {e}")
