@@ -12,7 +12,13 @@ st.set_page_config(
 # load .env to env variables
 load_dotenv()
 
-API_URL = os.getenv("API_URL")
+import os
+import streamlit as st
+
+try:
+    API_URL = st.secrets["API_URL"]
+except:
+    API_URL = os.getenv("API_URL")
 
 if not API_URL:
     st.error("API_URL not found. Check your .env file.")
@@ -63,6 +69,8 @@ if st.button("Predict 🧑‍⚕️"):
     }
 
     response = requests.post(API_URL, json=input_data)
+    st.write(response.status_code)
+    st.write(response.text)
 
     if response.status_code != 200:
         st.error("Something went wrong. Try again later...")
