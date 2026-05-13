@@ -30,7 +30,7 @@ def health_check():
     return {"status": "ok"}
 
 
-# Heart disease prediction endpoint
+# heart disease prediction endpoint
 @app.post("/predict-heart-disease")
 def predict_heart_disease(input_data: HeartDiseaseInput):
     input_data = input_data.model_dump()
