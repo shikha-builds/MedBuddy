@@ -68,10 +68,12 @@ if st.button("Predict 🧑‍⚕️"):
         "thal": thal
     }
 
-    response = requests.post(API_URL, json=input_data)
-    st.write(response.status_code)
-    st.write(response.text)
-
+    response = requests.post(
+    API_URL,
+    json=input_data,
+    timeout=60
+    )
+    
     if response.status_code != 200:
         st.error("Something went wrong. Try again later...")
 
