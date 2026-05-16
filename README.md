@@ -5,10 +5,12 @@
 ## Live Demo: https://medicalbuddy.streamlit.app/
 
 ### Tech Stack: 
+```
 **Frontend**: Streamlit
 **Backend**: FastAPI, Uvicorn
 **Machine Learning Libraries**: Scikit learn, NumPy, Pandas, Joblib
 **Deployment**: Render
+```
 
 ## Project Structure
 
