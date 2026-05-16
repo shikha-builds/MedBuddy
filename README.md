@@ -2,7 +2,7 @@
 
 ### Medbuddy is a ML based web application that predicts the likelihood of Heart Disease using medical parameters provided by the user. The project uses a trained ML model with a FastAPI backend and Streamlit frontend for real-time predictions.
 
-## Live Demo: https://medicalbuddy.streamlit.app/
+### Live Demo: https://medicalbuddy.streamlit.app/
 
 ### Tech Stack: 
 ```
@@ -12,9 +12,12 @@ Machine Learning Libraries: Scikit learn, NumPy, Pandas, Joblib
 Deployment: Render
 ```
 
-## Project Structure
+### Dataset:
+[heart.csv](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
 
-```text
+### Project Structure
+
+```
 MEDBUDDY
 │
 ├── backend
@@ -40,7 +43,6 @@ MEDBUDDY
 ├── .gitignore
 ├── env_template.txt
 └── README.md
-
-### Dataset: https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset
+```
 
 *Contributions are welcome!*
