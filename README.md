@@ -6,10 +6,10 @@
 
 ### Tech Stack: 
 ```
-**Frontend**: Streamlit
-**Backend**: FastAPI, Uvicorn
-**Machine Learning Libraries**: Scikit learn, NumPy, Pandas, Joblib
-**Deployment**: Render
+Frontend: Streamlit
+Backend: FastAPI, Uvicorn
+Machine Learning Libraries: Scikit learn, NumPy, Pandas, Joblib
+Deployment: Render
 ```
 
 ## Project Structure
